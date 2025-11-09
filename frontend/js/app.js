@@ -1,11 +1,16 @@
-const API_URL = 'http://localhost:3000/api/libros';
+// Detecta automáticamente el backend en el puerto 3000
+const API_BASE = window.location.hostname === 'localhost' 
+  ? 'http://localhost:3000' 
+  : `https://${window.location.hostname}`; // para despliegue futuro
+const API_URL = `${API_BASE}/api/libros`;
+
 
 // ✅ Función para obtener todos los libros
 async function obtenerLibros() {
   const token = localStorage.getItem('token');
   if (!token) {
     alert('No hay token. Inicia sesión primero.');
-    window.location.href = 'login.html';
+    window.location.href = 'login444.html';
     return;
   }
 
