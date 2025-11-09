@@ -10,7 +10,7 @@ async function obtenerLibros() {
   const token = localStorage.getItem('token');
   if (!token) {
     alert('No hay token. Inicia sesión primero.');
-    window.location.href = 'login444.html';
+    window.location.href = 'login.html';
     return;
   }
 
