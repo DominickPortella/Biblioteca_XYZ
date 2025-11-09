@@ -1,0 +1,26 @@
+:root {
+  /* Colores base */
+  --color-primario: #1E40AF;   /* Azul institucional */
+  --color-secundario: #2563EB; /* Azul acento */
+  --color-terciario: #3B82F6;  /* Azul claro */
+
+  /* Colores neutros */
+  --color-fondo: #F9FAFB;      /* Fondo claro */
+  --color-superficie: #FFFFFF;  /* Panel o tarjeta */
+  --color-texto: #111827;      /* Texto principal */
+  --color-texto-suave: #6B7280;/* Texto secundario */
+  --color-borde: #E5E7EB;      /* Bordes suaves */
+
+  /* Colores de estado */
+  --color-exito: #16A34A;      /* Verde profesional */
+  --color-advertencia: #EAB308;/* Amarillo elegante */
+  --color-error: #DC2626;      /* Rojo sobrio */
+  --color-info: #0EA5E9;       /* Azul informativo */
+
+  /* Tonos oscuros para modo oscuro */
+  --dark-fondo: #0F172A;
+  --dark-superficie: #1E293B;
+  --dark-texto: #F8FAFC;
+  --dark-texto-suave: #CBD5E1;
+  --dark-borde: #334155;
+}
