@@ -215,7 +215,7 @@ th, td {
     transform: translateY(0);
 }
 
-/* Toast Notification - Versión Elegante */
+/* Toast Notification */
 .toast {
     position: fixed;
     top: 20px;
@@ -285,7 +285,7 @@ th, td {
     line-height: 1.4;
 }
 
-/* Toast para errores (por si quieres usarlo también) */
+/* Toast para errores*/
 .toast.error {
     background: linear-gradient(135deg, #f44336, #d32f2f);
     border-left: 4px solid #b71c1c;
