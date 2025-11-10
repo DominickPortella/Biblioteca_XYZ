@@ -1,38 +1,35 @@
-// login.js
-const form = document.getElementById('formLogin');
-const mensaje = document.getElementById('mensaje');
+// ===== login.js =====
 
-// Si ya está logueado, redirigir directamente a la app
-const token = localStorage.getItem('token');
-if (token) {
-    window.location.href = 'index.html';
-}
+document.getElementById('loginBtn').addEventListener('click', login);
 
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+async function login() {
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const msg = document.getElementById('msg');
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+  msg.textContent = ''; // limpiar mensajes previos
 
-    try {
-        const response = await fetch('http://localhost:3000/api/usuarios/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
-        });
+  if (!email || !password) {
+    msg.textContent = 'Por favor completa todos los campos.';
+    return;
+  }
 
-        const data = await response.json();
-        mensaje.textContent = data.message || data.error;
+  try {
+    const res = await fetch('http://localhost:3000/api/usuarios/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
 
-        if (response.ok) {
-            mensaje.style.color = 'green';
-            localStorage.setItem('token', data.token);
-            setTimeout(() => (window.location.href = 'index.html'), 1000);
-        } else {
-            mensaje.style.color = 'red';
-        }
-    } catch (error) {
-        mensaje.textContent = 'Error al conectar con el servidor';
-        mensaje.style.color = 'red';
+    const data = await res.json();
+
+    if (res.ok) {
+      localStorage.setItem('token', data.token);
+      window.location.href = 'index.html';
+    } else {
+      msg.textContent = data.error || 'Credenciales incorrectas.';
     }
-});
+  } catch (error) {
+    msg.textContent = 'Error de conexión con el servidor.';
+  }
+}

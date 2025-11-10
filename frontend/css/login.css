@@ -1,0 +1,87 @@
+/* ===== login.css (con imagen de fondo completa) ===== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url("../img/124124124.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Contenedor principal */
+.login-container {
+  background: #ffffff;
+  padding: 40px 35px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 360px;
+  text-align: center;
+}
+
+/* Título */
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #4e4376;
+  letter-spacing: 1px;
+}
+
+/* Campos */
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 8px 0 18px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  outline: none;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.login-container input:focus {
+  border-color: #4e4376;
+  box-shadow: 0 0 5px #2b5876;
+}
+
+/* Botón */
+.login-container button {
+  width: 100%;
+  background: #4e4376;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.login-container button:hover {
+  background: #2b5876;
+}
+
+/* Enlaces */
+.login-container a {
+  display: block;
+  margin-top: 18px;
+  color: #4e4376;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.login-container a:hover {
+  color: #2b5876;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-container {
+    width: 90%;
+    padding: 30px 20px;
+  }
+}

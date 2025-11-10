@@ -4,82 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Biblioteca XYZ</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
+
   <div class="login-container">
-    <h2>Biblioteca XYZ</h2>
-    <input type="email" id="email" placeholder="Correo electrónico">
-    <input type="password" id="password" placeholder="Contraseña">  
-    <button onclick="login()">Iniciar sesión</button>
-     
-    <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
-    <p id="msg"></p>
+    <h2>Iniciar Sesión</h2>
+    <input type="text" placeholder="Correo electrónico" id="email">
+    <input type="password" placeholder="Contraseña" id="password">
+    <button id="loginBtn">Ingresar</button>
+    <a href="registro.html">¿No tienes cuenta? Regístrate aquí</a>
+    <p id="msg" style="color: red; margin-top: 10px;"></p>
   </div>
 
-   <script>
-    // Función para mostrar toast de éxito
-    function showSuccessToast(message) {
-        // Crear toast dinámicamente
-        const toast = document.createElement('div');
-        toast.className = 'toast';
-        toast.innerHTML = `
-            <i class="fa-solid fa-circle-check"></i>
-            <span class="toast-message">${message}</span>
-        `;
-        
-        document.body.appendChild(toast);
-        
-        // Remover después de 3 segundos
-        setTimeout(() => {
-            toast.classList.add('hide');
-            setTimeout(() => {
-                if (document.body.contains(toast)) {
-                    document.body.removeChild(toast);
-                }
-            }, 300);
-        }, 3000);
-    }
-
-    async function login() {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const msg = document.getElementById('msg');
-
-      try {
-        const res = await fetch('http://localhost:3000/api/usuarios/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
-
-        const data = await res.json();
-
-        if (res.ok) {
-          // ✅ Mostrar toast de éxito en lugar de redirección inmediata
-          showSuccessToast('Sesión iniciada correctamente');
-          localStorage.setItem('token', data.token);
-          
-          // Redirigir después de que el usuario vea el toast
-          setTimeout(() => {
-            window.location.href = 'index.html';
-          }, 1500);
-        } else {
-          msg.textContent = data.error || 'Error al iniciar sesión';
-          msg.style.color = 'red';
-        }
-      } catch (error) {
-        msg.textContent = 'Error de conexión con el servidor';
-        msg.style.color = 'red';
-      }
-    }
-
-    // Opcional: Si ya está logueado, redirigir directamente
-    const token = localStorage.getItem('token');
-    if (token) {
-        window.location.href = 'index.html';
-    }
-  </script>
+  <!-- Enlace a tu archivo JS -->
+  <script src="js/login.js"></script>
 </body>
 </html>
