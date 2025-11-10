@@ -1,0 +1,98 @@
+/* ===== login.css ===== */
+:root {
+  --bg: linear-gradient(135deg, #2b5876, #4e4376);
+  --card-bg: #ffffff;
+  --primary: #4e4376;
+  --primary-hover: #2b5876;
+  --input-border: #ccc;
+  --shadow: rgba(0, 0, 0, 0.15);
+  --radius: 12px;
+  --transition: all 0.3s ease;
+  --text: #333;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: var(--bg);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contenedor principal */
+.login-container {
+  background: var(--card-bg);
+  padding: 40px 35px;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 25px var(--shadow);
+  width: 360px;
+  text-align: center;
+}
+
+/* Título */
+.login-container h2 {
+  margin-bottom: 20px;
+  color: var(--primary);
+  letter-spacing: 1px;
+}
+
+/* Campos */
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 8px 0 18px;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius);
+  outline: none;
+  font-size: 15px;
+  transition: var(--transition);
+}
+
+.login-container input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 5px var(--primary-hover);
+}
+
+/* Botón */
+.login-container button {
+  width: 100%;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.login-container button:hover {
+  background: var(--primary-hover);
+}
+
+/* Enlaces */
+.login-container a {
+  display: block;
+  margin-top: 18px;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.login-container a:hover {
+  color: var(--primary-hover);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-container {
+    width: 90%;
+    padding: 30px 20px;
+  }
+}
