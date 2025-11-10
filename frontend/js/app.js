@@ -4,13 +4,86 @@ const API_BASE = window.location.hostname === 'localhost'
   : `https://${window.location.hostname}`; // para despliegue futuro
 const API_URL = `${API_BASE}/api/libros`;
 
+// ✅ Función para mostrar modal de éxito
+function showSuccessModal() {
+    showModal('¡Éxito!', 'Libro agregado correctamente', 'success');
+}
+
+// ✅ Función para mostrar modal de error
+function showErrorModal(message) {
+    showModal('Error', message, 'error');
+}
+
+// ✅ Función general para mostrar modales
+function showModal(title, message, type) {
+    // Crear modal dinámicamente si no existe
+    let modal = document.getElementById('customModal');
+    
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'customModal';
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-icon" id="modalIcon">📚</div>
+                <h3 id="modalTitle">Título</h3>
+                <p id="modalMessage">Mensaje</p>
+                <button class="close-modal" onclick="closeModal()">Aceptar</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        
+        // Cerrar modal al hacer click fuera
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+    
+    // Configurar contenido según el tipo
+    const modalContent = modal.querySelector('.modal-content');
+    const modalIcon = modal.querySelector('#modalIcon');
+    const modalTitle = modal.querySelector('#modalTitle');
+    const modalMessage = modal.querySelector('#modalMessage');
+    
+    // Estilos según el tipo
+    if (type === 'success') {
+        modalContent.className = 'modal-content modal-success';
+        modalIcon.textContent = '📚';
+        modalTitle.style.color = '#2E7D32';
+    } else {
+        modalContent.className = 'modal-content modal-error';
+        modalIcon.textContent = '⚠️';
+        modalTitle.style.color = '#D32F2F';
+    }
+    
+    modalTitle.textContent = title;
+    modalMessage.textContent = message;
+    modal.style.display = 'block';
+    
+    // Cerrar automáticamente después de 3 segundos
+    setTimeout(() => {
+        closeModal();
+    }, 3000);
+}
+
+// ✅ Función para cerrar el modal
+function closeModal() {
+    const modal = document.getElementById('customModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
 
 // ✅ Función para obtener todos los libros
 async function obtenerLibros() {
   const token = localStorage.getItem('token');
   if (!token) {
-    alert('No hay token. Inicia sesión primero.');
-    window.location.href = 'login.html';
+    showErrorModal('No hay token. Inicia sesión primero.');
+    setTimeout(() => {
+      window.location.href = 'login.html';
+    }, 2000);
     return;
   }
 
@@ -36,7 +109,7 @@ async function obtenerLibros() {
     });
   } catch (err) {
     console.error('Error al obtener libros:', err);
-    alert('Error al conectar con el servidor.');
+    showErrorModal('Error al conectar con el servidor.');
   }
 }
 
@@ -47,9 +120,9 @@ async function agregarLibro() {
   const autor = document.getElementById('autor').value.trim();
   const cantidad = document.getElementById('cantidad').value.trim();
 
-  // Validaciones básicas
+  // Validaciones básicas - ahora con modal de error
   if (!titulo || !autor || !cantidad) {
-    alert('Por favor, completa todos los campos.');
+    showErrorModal('Por favor, completa todos los campos.');
     return;
   }
 
@@ -66,17 +139,18 @@ async function agregarLibro() {
     const data = await res.json();
 
     if (res.ok) {
-      alert('📚 Libro agregado correctamente');
+      showSuccessModal();
+      
       document.getElementById('titulo').value = '';
       document.getElementById('autor').value = '';
       document.getElementById('cantidad').value = '';
       obtenerLibros();
     } else {
-      alert(data.error || 'Error al agregar el libro');
+      showErrorModal(data.error || 'Error al agregar el libro');
     }
   } catch (err) {
     console.error('Error al agregar libro:', err);
-    alert('Error al conectar con el servidor.');
+    showErrorModal('Error al conectar con el servidor.');
   }
 }
 
