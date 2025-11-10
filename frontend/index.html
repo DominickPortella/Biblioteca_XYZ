@@ -1,57 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Biblioteca XYZ</title>
-   <script>
-        
-        const token = localStorage.getItem('token');
-        if (!token) {
-            window.location.href = 'login.html';
-        }
-    </script>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-<!-- prueba - error -->
-<!-- Modal de éxito -->
-<div id="successModal" class="modal">
-  <div class="modal-content modal-success">
-    <div class="modal-icon">📚</div>
-    <h3>¡Éxito!</h3>
-    <p>Libro agregado correctamente</p>
-    <button class="close-modal" onclick="closeModal()">Aceptar</button>
-  </div>
-</div>
-
-<script src="js/app.js"></script>
 <body>
-  <div class="app-container">
-    <h1>📚 Biblioteca XYZ</h1>
 
-    <button onclick="logout()">Cerrar sesión</button>
+  <!-- Barra superior -->
+  <header class="topbar">
+    <button id="menu-btn" class="menu-btn" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <h1 class="app-title">Biblioteca XYZ</h1>
+  </header>
 
-    <h2>Agregar nuevo libro</h2>
-    <input type="text" id="titulo" placeholder="Título">
-    <input type="text" id="autor" placeholder="Autor">
-    <input type="number" id="cantidad" placeholder="Cantidad">
-    <button onclick="agregarLibro()">Agregar</button>
+  <!-- Barra lateral -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h2>📚 Biblioteca</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="libros.html" class="nav-item"><i>📖</i> Libros</a>
+      <a href="prestamos.html" class="nav-item"><i>💼</i> Préstamos</a>
+      <a href="registro.html" class="nav-item"><i>🧍</i> Registro</a>
+    </nav>
+  </aside>
 
-    <div class="hidden-section">
-    <h2>Lista de libros</h2>
-    <table id="tablaLibros">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Título</th>
-          <th>Autor</th>
-          <th>Cantidad</th>
-        </tr>
-      </thead>  
-      <tbody></tbody>
-    </table>
-    </div>  
-  </div>
+  <!-- Contenido principal -->
+  <main class="main-content">
+    <section class="welcome">
+      <h2>Bienvenido a la Biblioteca Digital</h2>
+      <p>Utiliza el menú lateral para navegar entre secciones.</p>
+    </section>
+  </main>
 
   <script src="js/app.js"></script>
 </body>
