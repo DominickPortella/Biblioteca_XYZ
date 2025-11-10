@@ -14,6 +14,7 @@
       <span></span><span></span><span></span>
     </button>
     <h1 class="app-title">Biblioteca XYZ</h1>
+    <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
   </header>
 
   <!-- Barra lateral -->
@@ -22,6 +23,7 @@
       <h2>📚 Biblioteca</h2>
     </div>
     <nav class="sidebar-nav">
+      <a href="index.html" class="nav-item active"><i>🏠</i> Inicio</a>
       <a href="libros.html" class="nav-item"><i>📖</i> Libros</a>
       <a href="prestamos.html" class="nav-item"><i>💼</i> Préstamos</a>
       <a href="registro.html" class="nav-item"><i>🧍</i> Registro</a>
@@ -32,10 +34,53 @@
   <main class="main-content">
     <section class="welcome">
       <h2>Bienvenido a la Biblioteca Digital</h2>
-      <p>Utiliza el menú lateral para navegar entre secciones.</p>
+      <p>Gestiona y descubre nuevos libros en nuestra colección.</p>
+    </section>
+
+    <!-- Cards de Libros -->
+    <section class="cards-section">
+      <!-- Card de Libros Nuevos -->
+      <div class="card">
+        <div class="card-header">
+          <h3>📚 Libros Nuevos</h3>
+          <a href="libros.html" class="view-all-btn">Ver Todos</a>
+        </div>
+        <div class="card-content">
+          <div class="books-grid" id="nuevosLibrosGrid">
+            <div class="loading">Cargando libros nuevos...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card de Libros Destacados -->
+      <div class="card">
+        <div class="card-header">
+          <h3>⭐ Libros Destacados</h3>
+          <span class="card-badge destacado">Próximamente</span>
+        </div>
+        <div class="card-content">
+          <div class="books-grid" id="destacadosLibrosGrid">
+            <div class="loading">Los libros más prestados aparecerán aquí</div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
+  <!-- Modal de Confirmación Logout -->
+  <div id="confirmModal" class="modal">
+    <div class="modal-content modal-confirm">
+      <div class="modal-icon">🔐</div>
+      <h3>Cerrar Sesión</h3>
+      <p>¿Estás seguro de que deseas cerrar sesión?</p>
+      <div class="modal-buttons">
+        <button class="modal-btn modal-btn-cancel" onclick="closeConfirmModal()">Cancelar</button>
+        <button class="modal-btn modal-btn-confirm" onclick="confirmLogout()">Sí, Cerrar Sesión</button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/app.js"></script>
+  <script src="js/dashboard.js"></script>
 </body>
 </html>
