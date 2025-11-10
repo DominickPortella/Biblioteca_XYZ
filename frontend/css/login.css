@@ -1,33 +1,22 @@
-/* ===== login.css ===== */
-:root {
-  --bg: linear-gradient(135deg, #2b5876, #4e4376);
-  --card-bg: #ffffff;
-  --primary: #4e4376;
-  --primary-hover: #2b5876;
-  --input-border: #ccc;
-  --shadow: rgba(0, 0, 0, 0.15);
-  --radius: 12px;
-  --transition: all 0.3s ease;
-  --text: #333;
-}
-
+/* ===== login.css (con imagen de fondo completa) ===== */
 body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
-  background: var(--bg);
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: url("../img/124124124.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 
 /* Contenedor principal */
 .login-container {
-  background: var(--card-bg);
+  background: #ffffff;
   padding: 40px 35px;
-  border-radius: var(--radius);
-  box-shadow: 0 8px 25px var(--shadow);
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   width: 360px;
   text-align: center;
 }
@@ -35,7 +24,7 @@ body {
 /* Título */
 .login-container h2 {
   margin-bottom: 20px;
-  color: var(--primary);
+  color: #4e4376;
   letter-spacing: 1px;
 }
 
@@ -45,48 +34,48 @@ body {
   width: 100%;
   padding: 12px 15px;
   margin: 8px 0 18px;
-  border: 1px solid var(--input-border);
-  border-radius: var(--radius);
+  border: 1px solid #ccc;
+  border-radius: 12px;
   outline: none;
   font-size: 15px;
-  transition: var(--transition);
+  transition: all 0.3s ease;
 }
 
 .login-container input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 5px var(--primary-hover);
+  border-color: #4e4376;
+  box-shadow: 0 0 5px #2b5876;
 }
 
 /* Botón */
 .login-container button {
   width: 100%;
-  background: var(--primary);
+  background: #4e4376;
   color: #fff;
   border: none;
   padding: 12px;
-  border-radius: var(--radius);
+  border-radius: 12px;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
-  transition: var(--transition);
+  transition: all 0.3s ease;
 }
 
 .login-container button:hover {
-  background: var(--primary-hover);
+  background: #2b5876;
 }
 
 /* Enlaces */
 .login-container a {
   display: block;
   margin-top: 18px;
-  color: var(--primary);
+  color: #4e4376;
   text-decoration: none;
   font-size: 14px;
-  transition: var(--transition);
+  transition: all 0.3s ease;
 }
 
 .login-container a:hover {
-  color: var(--primary-hover);
+  color: #2b5876;
 }
 
 /* Responsive */
