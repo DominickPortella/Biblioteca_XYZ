@@ -4,17 +4,72 @@ const API_BASE = window.location.hostname === 'localhost'
   : `https://${window.location.hostname}`; // para despliegue futuro
 const API_URL = `${API_BASE}/api/libros`;
 
-// ✅ Función para mostrar modal de éxito
+// Función para mostrar modal de éxito
 function showSuccessModal() {
     showModal('¡Éxito!', 'Libro agregado correctamente', 'success');
 }
 
-// ✅ Función para mostrar modal de error
+// Función para mostrar modal de error
 function showErrorModal(message) {
     showModal('Error', message, 'error');
 }
 
-// ✅ Función general para mostrar modales
+// Función para mostrar modal de confirmación
+function showConfirmModal(title, message, onConfirm) {
+    // Crear modal de confirmación dinámicamente si no existe
+    let modal = document.getElementById('confirmModal');
+    
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'confirmModal';
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-content modal-confirm">
+                <div class="modal-icon">🔐</div>
+                <h3 id="confirmTitle">Título</h3>
+                <p id="confirmMessage">Mensaje</p>
+                <div class="modal-buttons">
+                    <button class="modal-btn modal-btn-cancel" onclick="closeConfirmModal()">Cancelar</button>
+                    <button class="modal-btn modal-btn-confirm" id="confirmActionBtn">Confirmar</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        
+        // Cerrar modal al hacer click fuera
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeConfirmModal();
+            }
+        });
+    }
+    
+    // Configurar contenido
+    const modalTitle = modal.querySelector('#confirmTitle');
+    const modalMessage = modal.querySelector('#confirmMessage');
+    const confirmBtn = modal.querySelector('#confirmActionBtn');
+    
+    modalTitle.textContent = title;
+    modalMessage.textContent = message;
+    
+    // Configurar el evento de confirmación
+    confirmBtn.onclick = function() {
+        closeConfirmModal();
+        onConfirm();
+    };
+    
+    modal.style.display = 'block';
+}
+
+// Función para cerrar modal de confirmación
+function closeConfirmModal() {
+    const modal = document.getElementById('confirmModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Función general para mostrar modales
 function showModal(title, message, type) {
     // Crear modal dinámicamente si no existe
     let modal = document.getElementById('customModal');
@@ -68,7 +123,7 @@ function showModal(title, message, type) {
     }, 3000);
 }
 
-// ✅ Función para cerrar el modal
+// Función para cerrar el modal
 function closeModal() {
     const modal = document.getElementById('customModal');
     if (modal) {
@@ -76,7 +131,7 @@ function closeModal() {
     }
 }
 
-// ✅ Función para obtener todos los libros
+// Función para obtener todos los libros
 async function obtenerLibros() {
   const token = localStorage.getItem('token');
   if (!token) {
@@ -113,7 +168,7 @@ async function obtenerLibros() {
   }
 }
 
-// ✅ Función para agregar un libro nuevo
+// Función para agregar un libro nuevo
 async function agregarLibro() {
   const token = localStorage.getItem('token');
   const titulo = document.getElementById('titulo').value.trim();
@@ -154,11 +209,17 @@ async function agregarLibro() {
   }
 }
 
-// ✅ Cerrar sesión
+// Cerrar sesión CON MODAL DE CONFIRMACIÓN
 function logout() {
-  localStorage.removeItem('token');
-  window.location.href = 'login.html';
+  showConfirmModal(
+    'Cerrar Sesión', 
+    '¿Estás seguro de que deseas cerrar sesión?', 
+    function() {
+      localStorage.removeItem('token');
+      window.location.href = 'login.html';
+    }
+  );
 }
 
-// ✅ Cuando se cargue la página, obtener libros
+// Cuando se cargue la página, obtener libros
 window.onload = obtenerLibros;

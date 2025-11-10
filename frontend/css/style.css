@@ -96,6 +96,12 @@ th, td {
     background: linear-gradient(135deg, #fff8f8 0%, #ffffff 100%);
 }
 
+/* Modal de confirmación */
+.modal-confirm {
+    border-top: 5px solid #FF9800;
+    background: linear-gradient(135deg, #fffbf0 0%, #ffffff 100%);
+}
+
 .modal-icon {
     font-size: 64px;
     margin-bottom: 20px;
@@ -119,12 +125,17 @@ th, td {
     font-size: 24px;
 }
 
+.modal-confirm h3 {
+    color: #FF9800;
+}
+
 .modal-content p {
     color: #555;
     font-size: 16px;
     margin-bottom: 25px;
 }
 
+/* Botones para modales simples */
 .close-modal {
     background-color: #4CAF50;
     color: white;
@@ -155,4 +166,128 @@ th, td {
 
 .close-modal:active {
     transform: translateY(0);
+}
+
+/* Botones para modal de confirmación */
+.modal-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.modal-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+.modal-btn-cancel {
+    background-color: #9E9E9E;
+    color: white;
+    box-shadow: 0 4px 15px rgba(158, 158, 158, 0.3);
+}
+
+.modal-btn-cancel:hover {
+    background-color: #757575;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(158, 158, 158, 0.4);
+}
+
+.modal-btn-confirm {
+    background-color: #FF9800;
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+}
+
+.modal-btn-confirm:hover {
+    background-color: #F57C00;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+}
+
+.modal-btn:active {
+    transform: translateY(0);
+}
+
+/* Toast Notification - Versión Elegante */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+    z-index: 1000;
+    animation: slideInRight 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 320px;
+    border-left: 4px solid #2E7D32;
+    backdrop-filter: blur(10px);
+}
+
+.toast.hide {
+    animation: slideOutRight 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.toast-icon {
+    font-size: 22px;
+    animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: scale(1);
+    }
+    40% {
+        transform: scale(1.2);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+}
+
+.toast-message {
+    flex: 1;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Toast para errores (por si quieres usarlo también) */
+.toast.error {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    border-left: 4px solid #b71c1c;
+    box-shadow: 0 8px 25px rgba(244, 67, 54, 0.3);
 }
