@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Registro de Libros — Biblioteca XYZ</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/registro_libro.css" /> <!-- Estilos específicos de esta página -->
+</head>
+<body>
+
+  <!-- Barra superior -->
+  <header class="topbar">
+    <button id="menu-btn" class="menu-btn" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <h1 class="app-title">Registro de Libros</h1>
+  </header>
+
+  <!-- Barra lateral -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+    </div>
+    <nav class="sidebar-nav">
+      <a href="libros.html" class="nav-item"><i>📖</i> Libros</a>
+      <a href="prestamos.html" class="nav-item"><i>💼</i> Préstamos</a>
+      <a href="registro_libro.html" class="nav-item active"><i>🪶</i> Registro de Libros</a>
+      <a href="login.html" class="nav-item logout-item"><i>🚪</i> Cerrar sesión</a>
+    </nav>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="main-content">
+    <section class="section">
+      <h2>Administrar Libros</h2>
+
+      <!-- FORMULARIO PARA CREAR / EDITAR LIBROS -->
+      <div id="msg"></div>
+      <form id="bookForm" class="form-crud">
+        <input type="hidden" id="bookId">
+        <input type="text" id="titulo" placeholder="Título del Libro" required />
+        <input type="text" id="autor" placeholder="Autor del Libro" required />
+        <input type="number" id="cantidad" placeholder="Cantidad de Libros" min="1" required />
+        <button type="submit">Guardar</button>
+      </form>
+
+      <!-- TABLA DE LIBROS EXISTENTES -->
+      <h3>Libros Existentes</h3>
+      <table id="librosTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="5" style="text-align:center;">Cargando...</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+  <script src="js/registro_libro.js"></script>
+</body>
+</html>

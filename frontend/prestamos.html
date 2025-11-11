@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Préstamos — Biblioteca XYZ</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/prestamos.css" /> <!-- Estilos específicos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Librería para gráficos -->
+</head>
+<body>
+
+  <!-- Barra superior -->
+  <header class="topbar">
+    <button id="menu-btn" class="menu-btn" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <h1 class="app-title">Dashboard de Préstamos</h1>
+  </header>
+
+  <!-- Barra lateral -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="libros.html" class="nav-item"><i>📖</i> Libros</a>
+      <a href="prestamos.html" class="nav-item active"><i>💼</i> Préstamos</a>
+      <a href="registro_libro.html" class="nav-item"><i>🪶</i> Registro de Libros</a>
+      <a href="login.html" class="nav-item logout-item"><i>🚪</i> Cerrar sesión</a>
+    </nav>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="main-content">
+    <section class="dashboard-section">
+      <h2>Estadísticas de Préstamos</h2>
+
+      <!-- Estadísticas Generales -->
+      <div class="stats-cards">
+        <div class="card">
+          <h3>Total de Préstamos</h3>
+          <p id="totalPrestamos">Cargando...</p>
+        </div>
+        <div class="card">
+          <h3>Libro Más Prestado</h3>
+          <p id="libroMasPrestado">Cargando...</p>
+        </div>
+        <div class="card">
+          <h3>Préstamos Activos</h3>
+          <p id="prestamosActivos">Cargando...</p>
+        </div>
+      </div>
+      
+      <!-- Gráfico de libros más prestados -->
+      <h3>Gráfico de Libros Más Prestados</h3>
+      <canvas id="prestamosChart" width="400" height="200"></canvas>
+    </section>
+  </main>
+
+  <!-- Script para funcionalidad del menú -->
+  <script src="js/app.js"></script>
+
+  <!-- Script para gestionar los préstamos y estadísticas -->
+  <script src="js/prestamos.js"></script>
+</body>
+</html>

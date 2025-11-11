@@ -1,4 +1,6 @@
-/* ======== ESTILOS BASE ======== */
+/* ==========================
+   ESTILOS BASE
+========================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,7 +16,9 @@ body {
   flex-direction: column;
 }
 
-/* ======== BARRA SUPERIOR ======== */
+/* ==========================
+   BARRA SUPERIOR
+========================== */
 .topbar {
   position: fixed;
   top: 0;
@@ -33,13 +37,16 @@ body {
 .app-title {
   margin-left: 12px;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
-/* ======== BOTÓN HAMBURGUESA ======== */
+/* ==========================
+   BOTÓN HAMBURGUESA
+========================== */
 .menu-btn {
-  width: 30px;
-  height: 25px;
+  width: 32px;
+  height: 26px;
   position: relative;
   display: inline-flex;
   flex-direction: column;
@@ -48,6 +55,11 @@ body {
   background: none;
   border: none;
   padding: 0;
+  transition: transform 0.2s ease;
+}
+
+.menu-btn:hover {
+  transform: scale(1.05);
 }
 
 .menu-btn span {
@@ -62,16 +74,16 @@ body {
 .menu-btn.active span:nth-child(1) {
   transform: rotate(45deg) translateY(8px);
 }
-
 .menu-btn.active span:nth-child(2) {
   opacity: 0;
 }
-
 .menu-btn.active span:nth-child(3) {
   transform: rotate(-45deg) translateY(-8px);
 }
 
-/* ======== SIDEBAR ======== */
+/* ==========================
+   SIDEBAR
+========================== */
 .sidebar {
   position: fixed;
   top: 0;
@@ -79,7 +91,7 @@ body {
   width: 240px;
   height: 100%;
   background-color: #ffffff;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  box-shadow: 2px 0 12px rgba(0,0,0,0.08);
   transition: left 0.35s ease;
   z-index: 1500;
   display: flex;
@@ -93,44 +105,71 @@ body {
 .sidebar-header {
   background-color: #1e293b;
   color: #fff;
-  padding: 20px;
+  padding: 22px;
   text-align: center;
   font-weight: 600;
+  font-size: 18px;
   border-bottom: 1px solid #2e3b50;
 }
 
+/* ==========================
+   NAVEGACIÓN
+========================== */
 .sidebar-nav {
   display: flex;
   flex-direction: column;
   padding: 10px 0;
+  flex-grow: 1;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  padding: 14px 20px;
+  padding: 14px 22px;
   text-decoration: none;
-  color: #333;
+  color: #334155;
   font-weight: 500;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
+  border-left: 4px solid transparent;
 }
 
 .nav-item i {
-  margin-right: 10px;
+  margin-right: 12px;
   font-style: normal;
+  font-size: 18px;
 }
 
 .nav-item:hover {
   background-color: #f1f5f9;
   color: #2563eb;
+  border-left-color: #2563eb;
 }
 
 .nav-item.active {
   background-color: #e0ecff;
   color: #2563eb;
+  border-left-color: #2563eb;
 }
 
-/* ======== CONTENIDO PRINCIPAL ======== */
+/* ==========================
+   CERRAR SESIÓN (dentro del menú)
+========================== */
+.logout-link {
+  color: #dc2626;
+  margin-top: 10px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 14px;
+}
+
+.logout-link:hover {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border-left-color: #b91c1c;
+}
+
+/* ==========================
+   CONTENIDO PRINCIPAL
+========================== */
 .main-content {
   margin-top: 70px;
   padding: 30px;
@@ -147,17 +186,35 @@ body {
 }
 
 .welcome h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
+  font-size: 26px;
+  margin-bottom: 12px;
   color: #1e293b;
+  font-weight: 600;
 }
 
 .welcome p {
   font-size: 16px;
   color: #555;
+  line-height: 1.5;
 }
 
-/* ======== RESPONSIVE ======== */
+/* ==========================
+   SCROLLBAR PERSONALIZADO
+========================== */
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
 @media (max-width: 768px) {
   .sidebar {
     width: 200px;
@@ -165,5 +222,30 @@ body {
 
   .sidebar.open ~ .main-content {
     margin-left: 200px;
+  }
+
+  .app-title {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 180px;
+  }
+
+  .nav-item {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .nav-item i {
+    font-size: 16px;
+    margin-right: 8px;
+  }
+
+  .menu-btn {
+    width: 28px;
+    height: 22px;
   }
 }

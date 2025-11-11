@@ -17,9 +17,11 @@ app.get('/', (req, res) => {
 // Rutas
 const usuariosRoutes = require('./routes/usuarios');
 const librosRoutes = require('./routes/libros');
+const prestamosRoutes = require('./routes/prestamos');
 
 app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/libros', librosRoutes);
+app.use('/api/prestamos', prestamosRoutes);
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`✅ Servidor corriendo en http://localhost:${PORT}`));
