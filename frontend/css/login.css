@@ -1,4 +1,3 @@
-/* ===== login.css (con imagen de fondo completa) ===== */
 body {
   margin: 0;
   padding: 0;
@@ -8,10 +7,10 @@ body {
   align-items: center;
   justify-content: center;
   background: url("../img/124124124.jpg") no-repeat center center fixed;
+  z-index: -1;
   background-size: cover;
 }
 
-/* Contenedor principal */
 .login-container {
   background: #ffffff;
   padding: 40px 35px;
@@ -21,14 +20,12 @@ body {
   text-align: center;
 }
 
-/* Título */
 .login-container h2 {
   margin-bottom: 20px;
   color: #4e4376;
   letter-spacing: 1px;
 }
 
-/* Campos */
 .login-container input[type="text"],
 .login-container input[type="password"] {
   width: 100%;
@@ -46,7 +43,6 @@ body {
   box-shadow: 0 0 5px #2b5876;
 }
 
-/* Botón */
 .login-container button {
   width: 100%;
   background: #4e4376;
@@ -64,7 +60,6 @@ body {
   background: #2b5876;
 }
 
-/* Enlaces */
 .login-container a {
   display: block;
   margin-top: 18px;
@@ -78,10 +73,84 @@ body {
   color: #2b5876;
 }
 
-/* Responsive */
 @media (max-width: 480px) {
   .login-container {
     width: 90%;
     padding: 30px 20px;
   }
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+    z-index: 1000;
+    animation: slideInRight 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 320px;
+    border-left: 4px solid #2E7D32;
+    backdrop-filter: blur(10px);
+}
+
+.toast.hide {
+    animation: slideOutRight 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.toast-icon {
+    font-size: 22px;
+    animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: scale(1);
+    }
+    40% {
+        transform: scale(1.2);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+}
+
+.toast-message {
+    flex: 1;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.toast.error {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    border-left: 4px solid #b71c1c;
+    box-shadow: 0 8px 25px rgba(244, 67, 54, 0.3);
 }

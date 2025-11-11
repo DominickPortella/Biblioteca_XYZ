@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Biblioteca XYZ</title>
   <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -17,7 +18,72 @@
     <p id="msg" style="color: red; margin-top: 10px;"></p>
   </div>
 
+  <script>
+    // Función para mostrar toast de éxito
+    function showSuccessToast(message) {
+        // Crear toast dinámicamente
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `
+            <i class="toast-icon fas fa-check-circle"></i>
+            <span class="toast-message">${message}</span>
+        `;
+        
+        document.body.appendChild(toast);
+        
+        // Remover después de 3 segundos
+        setTimeout(() => {
+            toast.classList.add('hide');
+            setTimeout(() => {
+                if (document.body.contains(toast)) {
+                    document.body.removeChild(toast);
+                }
+            }, 300);
+        }, 3000);
+    }
+
+    async function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const msg = document.getElementById('msg');
+
+      try {
+        const res = await fetch('http://localhost:3000/api/usuarios/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          // ✅ Mostrar toast de éxito en lugar de redirección inmediata
+          showSuccessToast('Sesión iniciada correctamente');
+          localStorage.setItem('token', data.token);
+          
+          // Redirigir después de que el usuario vea el toast
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 1500);
+        } else {
+          msg.textContent = data.error || 'Error al iniciar sesión';
+          msg.style.color = 'red';
+        }
+      } catch (error) {
+        msg.textContent = 'Error de conexión con el servidor';
+        msg.style.color = 'red';
+      }
+    }
+
+    // Opcional: Si ya está logueado, redirigir directamente
+    const token = localStorage.getItem('token');
+    if (token) {
+        window.location.href = 'index.html';
+    }
+  </script>
+
   <!-- Enlace a tu archivo JS -->
   <script src="js/login.js"></script>
+
 </body>
 </html>
