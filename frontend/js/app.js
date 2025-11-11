@@ -1,164 +1,18 @@
-// Detecta automáticamente el backend en el puerto 3000
-const API_BASE = window.location.hostname === 'localhost' 
-  ? 'http://localhost:3000' 
-  : `https://${window.location.hostname}`; // para despliegue futuro
-const API_URL = `${API_BASE}/api/libros`;
+// ======== SCRIPT DE INTERACCIÓN ========
+const menuBtn = document.getElementById('menu-btn');
+const sidebar = document.getElementById('sidebar');
+const mainContent = document.querySelector('.main-content');
 
-// ✅ Función para mostrar modal de éxito
-function showSuccessModal() {
-    showModal('¡Éxito!', 'Libro agregado correctamente', 'success');
-}
+// Abrir / cerrar sidebar
+menuBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+  menuBtn.classList.toggle('active');
+});
 
-// ✅ Función para mostrar modal de error
-function showErrorModal(message) {
-    showModal('Error', message, 'error');
-}
-
-// ✅ Función general para mostrar modales
-function showModal(title, message, type) {
-    // Crear modal dinámicamente si no existe
-    let modal = document.getElementById('customModal');
-    
-    if (!modal) {
-        modal = document.createElement('div');
-        modal.id = 'customModal';
-        modal.className = 'modal';
-        modal.innerHTML = `
-            <div class="modal-content">
-                <div class="modal-icon" id="modalIcon">📚</div>
-                <h3 id="modalTitle">Título</h3>
-                <p id="modalMessage">Mensaje</p>
-                <button class="close-modal" onclick="closeModal()">Aceptar</button>
-            </div>
-        `;
-        document.body.appendChild(modal);
-        
-        // Cerrar modal al hacer click fuera
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-    }
-    
-    // Configurar contenido según el tipo
-    const modalContent = modal.querySelector('.modal-content');
-    const modalIcon = modal.querySelector('#modalIcon');
-    const modalTitle = modal.querySelector('#modalTitle');
-    const modalMessage = modal.querySelector('#modalMessage');
-    
-    // Estilos según el tipo
-    if (type === 'success') {
-        modalContent.className = 'modal-content modal-success';
-        modalIcon.textContent = '📚';
-        modalTitle.style.color = '#2E7D32';
-    } else {
-        modalContent.className = 'modal-content modal-error';
-        modalIcon.textContent = '⚠️';
-        modalTitle.style.color = '#D32F2F';
-    }
-    
-    modalTitle.textContent = title;
-    modalMessage.textContent = message;
-    modal.style.display = 'block';
-    
-    // Cerrar automáticamente después de 3 segundos
-    setTimeout(() => {
-        closeModal();
-    }, 3000);
-}
-
-// ✅ Función para cerrar el modal
-function closeModal() {
-    const modal = document.getElementById('customModal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
-}
-
-// ✅ Función para obtener todos los libros
-async function obtenerLibros() {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    showErrorModal('No hay token. Inicia sesión primero.');
-    setTimeout(() => {
-      window.location.href = 'login.html';
-    }, 2000);
-    return;
+// Cerrar sidebar si se hace clic fuera (en pantallas pequeñas)
+document.addEventListener('click', (e) => {
+  if (!sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
+    sidebar.classList.remove('open');
+    menuBtn.classList.remove('active');
   }
-
-  try {
-    const res = await fetch(API_URL, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    const data = await res.json();
-
-    const tbody = document.querySelector('#tablaLibros tbody');
-    tbody.innerHTML = '';
-
-    data.forEach((libro) => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${libro.id}</td>
-        <td>${libro.titulo}</td>
-        <td>${libro.autor}</td>
-        <td>${libro.cantidad}</td>
-      `;
-      tbody.appendChild(tr);
-    });
-  } catch (err) {
-    console.error('Error al obtener libros:', err);
-    showErrorModal('Error al conectar con el servidor.');
-  }
-}
-
-// ✅ Función para agregar un libro nuevo
-async function agregarLibro() {
-  const token = localStorage.getItem('token');
-  const titulo = document.getElementById('titulo').value.trim();
-  const autor = document.getElementById('autor').value.trim();
-  const cantidad = document.getElementById('cantidad').value.trim();
-
-  // Validaciones básicas - ahora con modal de error
-  if (!titulo || !autor || !cantidad) {
-    showErrorModal('Por favor, completa todos los campos.');
-    return;
-  }
-
-  try {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ titulo, autor, cantidad }),
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      showSuccessModal();
-      
-      document.getElementById('titulo').value = '';
-      document.getElementById('autor').value = '';
-      document.getElementById('cantidad').value = '';
-      obtenerLibros();
-    } else {
-      showErrorModal(data.error || 'Error al agregar el libro');
-    }
-  } catch (err) {
-    console.error('Error al agregar libro:', err);
-    showErrorModal('Error al conectar con el servidor.');
-  }
-}
-
-// ✅ Cerrar sesión
-function logout() {
-  localStorage.removeItem('token');
-  window.location.href = 'login.html';
-}
-
-// ✅ Cuando se cargue la página, obtener libros
-window.onload = obtenerLibros;
+});

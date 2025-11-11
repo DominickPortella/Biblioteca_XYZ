@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gestión de Libros - Biblioteca XYZ</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/libros.css" />
+</head>
+<body>
+
+  <!-- Barra superior -->
+  <header class="topbar">
+    <button id="menu-btn" class="menu-btn" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <h1 class="app-title">Biblioteca XYZ</h1>
+    <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+  </header>
+
+  <!-- Barra lateral -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h2>📚 Biblioteca</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="nav-item"><i>🏠</i> Inicio</a>
+      <a href="libros.html" class="nav-item active"><i>📖</i> Libros</a>
+      <a href="prestamos.html" class="nav-item"><i>💼</i> Préstamos</a>
+      <a href="registro.html" class="nav-item"><i>🧍</i> Registro</a>
+    </nav>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="main-content">
+    <div class="page-header">
+      <h2 class="page-title">📚 Gestión de Libros</h2>
+      <button class="add-book-btn" onclick="mostrarModalAgregar()">
+        <i>➕</i> Agregar Libro
+      </button>
+    </div>
+
+    <div class="books-table-container">
+      <table class="books-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Disponibilidad</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="librosTableBody">
+          <tr>
+            <td colspan="6">
+              <div class="loading-container">
+                Cargando lista de libros...
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Modal para agregar libro -->
+  <div id="modalAgregarLibro" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Agregar Nuevo Libro</h3>
+        <button class="close-modal-btn" onclick="cerrarModalAgregar()">&times;</button>
+      </div>
+      <form id="formAgregarLibro" class="modal-form">
+        <div class="form-group">
+          <label for="titulo">Título del Libro</label>
+          <input type="text" id="titulo" name="titulo" required>
+        </div>
+        <div class="form-group">
+          <label for="autor">Autor</label>
+          <input type="text" id="autor" name="autor" required>
+        </div>
+        <div class="form-group">
+          <label for="cantidad">Cantidad Disponible</label>
+          <input type="number" id="cantidad" name="cantidad" min="0" required>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="modal-btn modal-btn-cancel" onclick="cerrarModalAgregar()">Cancelar</button>
+          <button type="submit" class="modal-btn modal-btn-confirm">Agregar Libro</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmación Logout -->
+  <div id="confirmModal" class="modal">
+    <div class="modal-content modal-confirm">
+      <div class="modal-icon">🔐</div>
+      <h3>Cerrar Sesión</h3>
+      <p>¿Estás seguro de que deseas cerrar sesión?</p>
+      <div class="modal-buttons">
+        <button class="modal-btn modal-btn-cancel" onclick="closeConfirmModal()">Cancelar</button>
+        <button class="modal-btn modal-btn-confirm" onclick="confirmLogout()">Sí, Cerrar Sesión</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/libros.js"></script>
+</body>
+</html>
