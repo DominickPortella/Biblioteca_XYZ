@@ -1,12 +1,16 @@
-/* ===== login.css (con imagen de fondo completa) ===== */
-body {
+/* ===== login.css (con imagen de fondo centrada y cuadro al medio) ===== */
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
+}
+
+body {
   font-family: "Poppins", sans-serif;
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100vh;
   background: url("../img/124124124.jpg") no-repeat center center fixed;
   background-size: cover;
 }
@@ -16,9 +20,11 @@ body {
   background: #ffffff;
   padding: 40px 35px;
   border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
   width: 360px;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 /* Título */
@@ -32,6 +38,7 @@ body {
 .login-container input[type="text"],
 .login-container input[type="password"] {
   width: 100%;
+  box-sizing: border-box;
   padding: 12px 15px;
   margin: 8px 0 18px;
   border: 1px solid #ccc;
@@ -64,7 +71,7 @@ body {
   background: #2b5876;
 }
 
-/* Enlaces */
+/* Enlace */
 .login-container a {
   display: block;
   margin-top: 18px;
